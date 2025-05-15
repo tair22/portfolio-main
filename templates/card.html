@@ -31,7 +31,6 @@ body {
 
 h1, h2, p {
     margin: 0;
-
 }
 
 
@@ -40,11 +39,9 @@ img {
 }
 
 a {
-    font-size: 5px;
     text-decoration: none;
     color: inherit;
     transition: 0.2s;
-    font-size: 5px;
 }
 
 ul {
@@ -64,8 +61,7 @@ ul {
 .main-list {
     display: flex;
     align-items: center;
-    gap: 50px;
-
+    gap: 20px;
 }
 
 
@@ -104,7 +100,7 @@ ul {
 }
 
 .card__text {
-    border-top: 1px solid rgb(23, 136, 59);
+    border-top: 1px solid rgb(44, 136, 23);
     width: inherit;
     display: flex;
     padding: 50px 0 20px;
@@ -116,7 +112,6 @@ ul {
 .card__email {
     padding: 0 20px;
     text-align: center;
-    
 }
 
 
@@ -206,6 +201,11 @@ ul {
     align-items: center;
 }
 
+.main__subtitle {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 .main__text {
     line-height: 30px;
     margin-bottom: 40px;
@@ -240,27 +240,19 @@ ul {
   >
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../static/css/style.css">
-    <title>Result</title>
+  <title>Card</title>
 </head>
 <body>
-  <main>
+  <main class="main">
     {% block content %}
-    <h1 class="home__title">Your writings</h1>
-    <ul class="cards-list">
-      {% for el in cards%}
-      <li class="card">
-        <a class="card__link" href="/card/{{el.id}}">
-          <img class="card__img" src="../static/img/post_icon.png" width="250" height="250" alt="post_icon">
-          <h2 class="card__email">{{el.email}}</h2>
-          <div class="card__text">{{el.text}}</div>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-    {% endblock %}
+    <h1 class="main__email">{{card.email}}</h1>
+    <div class="main__block">
+      <div class="main__text">
+      {{card.text}}
+      </div>
+      <a class="main__link" href="/form_result">Back to writings</a>
+    </div>
   </main>
-  <footer>
-
-  </footer>
+  {% endblock %}
 </body>
 </html>

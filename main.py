@@ -1,9 +1,30 @@
 #Импорт
 from flask import Flask, render_template,request, redirect
-
+#Подключение библиотеки баз данных
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+#Подключение SQLite
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///diary.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#Создание db
+db = SQLAlchemy(app)
+#Создание таблицы
+
+class Card(db.Model):
+    #Создание полей
+    #id
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.Text(100), primary_key=False)
+    #Текст
+    text = db.Column(db.VARCHAR(50), nullable=False)
+
+    #Вывод объекта и id
+    def __repr__(self):
+        return f'<Card {self.id}>'
+
+
 
 #Запуск страницы с контентом
 @app.route('/')
@@ -21,23 +42,33 @@ def process_form():
     return render_template('index.html', button_python=button_python, button_tg=button_tg, button_html=button_html, button_db=button_db)
 
 #Результаты формы
-@app.route('/submit', methods=['POST'])
-def submit_form():
-    #Создай переменные для сбора информации
+@app.route('/submit',methods=['POST'])
+def submit():
     email = request.form['email']
     text = request.form['text']
 
-    with open('form.txt', 'a',) as f:
-        f.write(text+' '+email+ '\n')
+    #Создание объкта для передачи в дб
+
+    card = Card(email=email, text=text)
+
+    db.session.add(card)
+    db.session.commit()
+    return redirect('/form_result')
+
+#Запуск страницы с контентом
+@app.route('/form_result')
+def form_result():
+    #Отображение объектов из БД
+    cards = Card.query.order_by(Card.id).all()
+    return render_template('form_result.html', cards=cards)
 
 
+#Запуск страницы c картой
+@app.route('/card/<int:id>')
+def card(id):
+    card = Card.query.get(id)
+    return render_template('card.html', card=card)
 
-    # здесь вы можете сохранить данные или отправить их по электронной почте
-    return render_template('form_result.html', 
-                           #Помести переменные
-                           email=email,
-                           text=text
-                           )
 
 
 if __name__ == "__main__":

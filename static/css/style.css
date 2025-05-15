@@ -23,12 +23,13 @@ h1,
 h2,
 p {
   margin: 0;
+
 }
 
 h1,
 h2 {
   font-weight: 700;
-  font-size: 42px;
+  font-size: 16px;
 }
 
 img {
@@ -39,7 +40,7 @@ a {
   text-decoration: none;
   color: inherit;
   transition: 0.2s;
-  font-size: 70px;
+  font-size: 5px;
   color: #3F8A83;
 }
 
@@ -258,6 +259,7 @@ ul {
   width: 100%;
   color:#3dc707;
 }
+
 
 .feedback {
   margin-bottom: 200px;

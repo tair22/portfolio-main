@@ -105,45 +105,51 @@
         {% if button_python%}
           <div class="skills__project project" id="project">
               <img class="project__img" src="../static/img/python-project.png" alt="project" width="500">
-              <a class="project__link" href="https://github.com/tair22/calculator-main">Open on GitHub</a>
+              <a class="project__link" href="https://github.com/tair22/calculator-main" target="_blank">Open on GitHub</a>
           </div>
         {% endif %}
         {% if button_tg%}
           <div class="skills__project project" id="project">
               <img class="project__img" src="../static/img/tg-project.jpg" alt="project" width="500">
-              <a class="project__link" href="https://github.com/tair22/M2L2">Open on GitHub</a>
+              <a class="project__link" href="https://github.com/tair22/M2L2" target="_blank">Open on GitHub</a>
           </div>
         {% endif %}
         {% if button_html%}
           <div class="skills__project project" id="project">
               <img class="project__img" src="../static/img/html-project.jpg" alt="project" width="500">
-              <a class="project__link" href="https://github.com/tair22/site">Open on GitHub</a>
+              <a class="project__link" href="https://github.com/tair22/site" target="_blank">Open on GitHub</a>
           </div>
         {% endif %}
         {% if button_db%}
           <div class="skills__project project" id="project">
               <img class="project__img" src="../static/img/db-project.jpg" alt="project" width="500">
-              <a class="project__link" href="https://github.com/tair22/project">Open on GitHub</a>
+              <a class="project__link" href="https://github.com/tair22/project" target="_blank">Open on GitHub</a>
           </div>
         {% endif %}
       </section>
       <!-- Секция с формой обратной связи -->
       <section class="main__feedback feedback" id="feedback">
         <h2 class="feedback__title">FEEDBACK</h2>
-        <form action="{{ url_for('submit_form') }}" method="POST" class="feedback__form form">
-          <label for="email">
-            <input type="email" class="form__input" name="email" id="email" placeholder="Write your E-mail" required>
-          </label>
-          <label for="text">
-            <textarea name="text" class="form__input" id="text" cols="70" rows="10" required placeholder="Commentary"></textarea>
-          </label>
-          <button class="form__button" type="submit">SEND</button>
+        {% block content %}
+        <form action="{{ url_for('submit') }}" method="POST" class="creat-form">
+          <div class="form__card">
+            <div class="form__inputs">
+              <label for="email">
+                <input type="email" class="form__input" name="email" id="email" placeholder="Write your E-mail" required>
+              </label>
+            </div>
+            <label for="text">
+              <textarea name="text" class="form__input" id="text" cols="70" rows="10" required placeholder="Commentary"></textarea>
+            </label>
+            <button class="form__button" type="submit">SEND</button>
+          </div>
         </form>
+        {% endblock %}
       </section>
     </main>
     <!-- Подвал для ссылок на соц-сети -->
     <footer>
-    <a href="https://t.me/Ronikun">Автор сайта/Website's author</a>
+      <a href="https://t.me/Ronikun" style="font-size:70px" target="_blank">Автор сайта/Website's author</a>
     </footer>
   </body>
 </html>
